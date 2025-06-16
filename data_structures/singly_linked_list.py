@@ -43,8 +43,14 @@ class singlyLinkedList:
             cur = cur.next
             counter += 1
 
-        if index == counter and prev:
-            prev.next = node(value)
+        if index == counter:
+            if prev:
+                prev.next = node(value)
+            else:
+                self.head = node(value)
+            return
+
+        raise IndexError('Index not valid')
 
     def delete(self, value):
         """Delete the first node with the given value. 
@@ -65,17 +71,29 @@ class singlyLinkedList:
     def delete_at_index(self, index):
         """Delete the node at a specific index. 
         Time Complexity: O(n)"""
-        pass
+        counter, cur, prev = 0, self.head, None
+
+        while cur:
+            if counter == index:
+                if prev:
+                    prev.next = cur.next
+                else:
+                    self.head = cur.next
+                return
+            prev = cur
+            counter += 1
+            cur = cur.next
 
     def search(self, value):
         """Return the index of the first occurrence of value. 
         Time Complexity: O(n)"""
-        pass
-
-    def get(self, index):
-        """Return the value at a specific index. 
-        Time Complexity: O(n)"""
-        pass
+        counter, cur = 0, self.head
+        while cur:
+            if cur.value == value:
+                return counter
+            counter += 1
+            cur = cur.next
+        return -1
 
     def is_empty(self):
         """Check if the list is empty. 
@@ -108,28 +126,9 @@ class singlyLinkedList:
     def to_list(self):
         """Convert the linked list to a Python list. 
         Time Complexity: O(n)"""
-        pass
+        arr, cur = [], self.head
+        while cur:
+            arr.append(cur.value)
+            cur = cur.next
+        return arr
 
-    def print_list(self):
-        """Print all elements in the list. 
-        Time Complexity: O(n)"""
-        pass
-
-
-
-if __name__ == "__main__":
-    print("Creating new singly linked list...")
-    ll = singlyLinkedList()
-
-    print("Appending values: 10, 20, 30")
-    ll.append(10)
-    ll.append(20)
-    ll.append(30)
-
-    print("Current list contents (manual traversal):")
-    cur = ll.head
-    index = 0
-    while cur:
-        print(f"Index {index}: {cur.value}")
-        cur = cur.next
-        index += 1
