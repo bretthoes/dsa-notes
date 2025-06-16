@@ -87,7 +87,6 @@ class singlyLinkedList:
         Time Complexity: O(n)"""
         cur = self.head
         count = 0
-        # o -> o -> o
         while cur:
             count += 1
             cur = cur.next
@@ -97,7 +96,14 @@ class singlyLinkedList:
     def reverse(self):
         """Reverse the linked list in-place. 
         Time Complexity: O(n)"""
-        pass
+        cur = self.head
+        prev = None
+        while cur:
+            tmp = cur.next
+            cur.next = prev
+            prev = cur
+            cur = tmp
+        self.head = prev
 
     def to_list(self):
         """Convert the linked list to a Python list. 
