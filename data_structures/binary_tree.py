@@ -17,3 +17,19 @@ class BinarySearchTree:
     def __init__(self, value):
         self.root = TreeNode(value)
 
+    def search(self, target):
+        """
+        O(log n)
+        """
+        def find(root, target):
+            if not root:
+                return False
+
+            if root.value > target:
+                find(root.left, target)
+            elif root.value < target:
+                find(root.right, target)
+            else:
+                return True
+
+        return find(self.root, target)
