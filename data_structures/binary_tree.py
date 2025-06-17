@@ -21,15 +21,86 @@ class BinarySearchTree:
         """
         O(log n)
         """
-        def find(root, target):
+        def search(root, target) -> TreeNode | None:
             if not root:
-                return False
+                return None
 
             if root.value > target:
-                find(root.left, target)
+                search(root.left, target)
             elif root.value < target:
-                find(root.right, target)
+                search(root.right, target)
             else:
-                return True
+                return root
 
-        return find(self.root, target)
+        return search(self.root, target)
+
+    def insert(self, value):
+        """
+        O(log n)
+        """
+        def insert(root, value):
+            if not root:
+                return TreeNode(value)
+            if value < root.value:
+                root.left = insert(root.left, value)
+            else:
+                root.right = insert(root.right, value)
+            return root
+        return insert(self.root, value)
+
+    def getMin(self):
+        """
+        O(log n)
+        """
+        cur = self.root
+        while cur and cur.left:
+            cur = cur.left
+        return cur
+
+    def remove(self, value):
+        """
+        Case 1:
+            Node to remove has 0 or 1 child
+        Case 2:
+            Node to remove has 2 children. In this case, need to replace node with either:
+            - Largest value in right subtree, or
+            - Smallest value in left subtree
+        """
+        def remove(root: TreeNode | None, value: int):
+            if not root:
+                return
+            if value < root.value:
+                root.left = remove(root.left, value)
+            elif value > root.value:
+                root.right = remove(root.right, value)
+            else: # remove this node
+                if not root.left and not root.right: # 0 children
+                    return None
+                elif root.left and not root.right: # 1 child
+                    return root.left
+                elif root.right and not root.left: # 1 child
+                    return root.right
+                else: # 2 children
+                    # TODO handle 2 children
+                    return None
+
+        remove(self.root, value)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
