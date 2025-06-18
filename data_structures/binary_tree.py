@@ -1,8 +1,8 @@
 class TreeNode:
-    def __init__(self, value):
+    def __init__(self, value: int, left: 'TreeNode | None' = None, right: 'TreeNode | None' = None):
         self.value = value
-        self.left = None
-        self.right = None
+        self.left = left
+        self.right = right
 
 class BinaryTree:
     def __init__(self, value):
@@ -19,7 +19,7 @@ class BinarySearchTree:
 
     def search(self, target):
         """
-        O(log n)
+        O(log n) average, O(n) worst-case.
         """
         def search(root, target) -> TreeNode | None:
             if not root:
@@ -36,7 +36,7 @@ class BinarySearchTree:
 
     def insert(self, value):
         """
-        O(log n)
+        O(log n) average, O(n) worst-case.
         """
         def insert(root, value):
             if not root:
@@ -48,43 +48,49 @@ class BinarySearchTree:
             return root
         return insert(self.root, value)
 
-    def getMin(self):
+    def getMin(self, cur):
         """
-        O(log n)
+        O(log n) average, O(n) worst-case.
         """
-        cur = self.root
         while cur and cur.left:
             cur = cur.left
         return cur
 
     def remove(self, value):
         """
-        Case 1:
-            Node to remove has 0 or 1 child
-        Case 2:
-            Node to remove has 2 children. In this case, need to replace node with either:
-            - Largest value in right subtree, or
-            - Smallest value in left subtree
+        Remove `value` from the BST.
+        Case 1: Node has 0 or 1 child.
+        Case 2: Node has 2 children: replace with in-order successor.
         """
-        def remove(root: TreeNode | None, value: int):
+        def _remove(root: TreeNode | None, value: int):
             if not root:
-                return
-            if value < root.value:
-                root.left = remove(root.left, value)
-            elif value > root.value:
-                root.right = remove(root.right, value)
-            else: # remove this node
-                if not root.left and not root.right: # 0 children
-                    return None
-                elif root.left and not root.right: # 1 child
-                    return root.left
-                elif root.right and not root.left: # 1 child
-                    return root.right
-                else: # 2 children
-                    # TODO handle 2 children
-                    return None
+                return None
 
-        remove(self.root, value)
+            if value < root.value:
+                root.left = _remove(root.left, value)
+            elif value > root.value:
+                root.right = _remove(root.right, value)
+            else:
+                # --- Case 1: zero or one child ---
+                if root.left is None and root.right is None:
+                    return None
+                if root.left is None:
+                    return root.right
+                if root.right is None:
+                    return root.left
+
+                # --- Case 2: two children ---
+                # 1. Find successor (smallest in right subtree)
+                succ = self.getMin(root.right)
+                # 2. Copy its value
+                root.value = succ.value
+                #. 3. Delete successor
+                root.right = _remove(root.right, succ.value)
+
+            return root
+
+                
+        self.root = _remove(self.root, value)
 
 
 
