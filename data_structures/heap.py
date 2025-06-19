@@ -71,10 +71,44 @@ class MinHeap:
         # return the value we saved before loop
         return root_value
         
+    def heapify(self, data: list[int]) -> None:
+        """
+        Build the heap from the given list via bottom-up approach
+        After calling this, self.heap should be a valid min-heap containing all elements from data.
+        Time Complexity: O(n)
+        """
+        #copy original list
+        self.heap = data[:]
 
-if __name__ == "__main__":
-    # Example usage for MinHeap
-    min_h = MinHeap()
-    for v in [3, 1, 4, 1, 5, 9, 2, 6, 5]:
-        min_h.push(v)
-    print("MinHeap pop sequence:", [min_h.pop() for _ in range(len(min_h))])
+        #base case
+        n = len(self.heap)
+        if n <= 1:
+            return
+
+        # dont need to start with leaf nodes since they have no children
+        # to compare against; get index of first parent node and iterate backwards
+        last_parent = (n - 2) // 2
+        for i in range(last_parent, -1, -1):
+            # begin sifting parent node downwards as needed
+            cur = i
+            while True:
+                left = (cur * 2) + 1
+                right = (cur * 2) + 2
+                smallest = cur
+
+                if left < n and self.heap[left] < self.heap[smallest]:
+                    smallest = left
+                if right < n and self.heap[right] < self.heap[smallest]:
+                    smallest = right
+                if smallest == cur:
+                    break
+
+                self.heap[cur], self.heap[smallest] = self.heap[smallest], self.heap[cur]
+                cur = smallest
+
+
+
+
+
+
+
