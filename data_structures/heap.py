@@ -133,35 +133,41 @@ class MinHeap:
         Replace root with last element and sift-down to restore heap property.
         Time Complexity: O(log n)
         """
+        # base cases
         if not self.heap:
             return None
-        n = len(self.heap)
-        if n == 1:
+        if len(self.heap) == 1:
             return self.heap.pop()
-        # Save root value to return
+
+        # save return value, replace with last element in heap
         root_value = self.heap[0]
-        # Move last element to root
         self.heap[0] = self.heap.pop()
-        # Sift down from root
+
+        # sift down
         i = 0
         n = len(self.heap)
-        while True:
-            left = 2 * i + 1
-            right = 2 * i + 2
+        # while at least one child exists
+        while (i * 2) + 1 < n:
+            left = (i * 2) + 1
+            right = (i * 2) + 2
             smallest = i
-            # Check left child
-            if left < n and self.heap[left] < self.heap[smallest]:
+            # get the smallest between left, right and i
+            if left < n and self.heap[left] < self.heap[i]:
                 smallest = left
-            # Check right child
             if right < n and self.heap[right] < self.heap[smallest]:
                 smallest = right
+            # if i is the smallest (we didnt update), we can break
+            # since the children are both larger
             if smallest == i:
                 break
-            # Swap current with smaller child
+
+            # otherwise, swap and update i
             self.heap[i], self.heap[smallest] = self.heap[smallest], self.heap[i]
             i = smallest
-        return root_value
 
+        # return the value we saved before loop
+        return root_value
+        
 
 if __name__ == "__main__":
     # Example usage for MaxHeap
