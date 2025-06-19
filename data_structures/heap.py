@@ -14,14 +14,6 @@ class MinHeap:
         """Initialize an empty min-heap."""
         self.heap = []
 
-    def __len__(self) -> int:
-        """Return number of elements in heap."""
-        return len(self.heap)
-
-    def is_empty(self) -> bool:
-        """Check if heap is empty."""
-        return not self.heap
-
     def push(self, value: int) -> None:
         """
         Insert value into heap, maintaining min-heap property via sift-up.
@@ -37,12 +29,6 @@ class MinHeap:
             # Swap child and parent
             self.heap[i], self.heap[parent] = self.heap[parent], self.heap[i]
             i = parent
-
-    def peek(self) -> int | None:
-        """Return the min element without removing it, or None if empty."""
-        if self.heap:
-            return self.heap[0]
-        return None
 
     def pop(self) -> int | None:
         """
@@ -87,12 +73,6 @@ class MinHeap:
         
 
 if __name__ == "__main__":
-    # Example usage for MaxHeap
-    max_h = MaxHeap()
-    for v in [3, 1, 4, 1, 5, 9, 2, 6, 5]:
-        max_h.push(v)
-    print("MaxHeap pop sequence:", [max_h.pop() for _ in range(len(max_h))])
-
     # Example usage for MinHeap
     min_h = MinHeap()
     for v in [3, 1, 4, 1, 5, 9, 2, 6, 5]:
