@@ -117,12 +117,3 @@
 
 """
 
-from collections import deque
-
-
-class GraphNode:
-    def __init__(self, value) -> None:
-        self.value = value
-        self.neighbors = []
-
-

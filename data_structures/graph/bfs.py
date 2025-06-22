@@ -5,9 +5,10 @@ grid = [[0,0,0,0],
         [0,0,0,1],
         [0,1,0,0]]
 
-# shortest path from top left to bottom right; O(n)
+# shortest path from top left to bottom right
 # goes layer by layer processing queue in iterations;
 # useful for counting steps in a bfs style question
+# O(n*m) where n and m are the dimensions of the grid
 def bfs(grid):
     ROWS, COLS = len(grid), len(grid[0])
     count = 0
