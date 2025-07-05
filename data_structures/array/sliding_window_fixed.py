@@ -17,6 +17,7 @@ def has_duplicate_within_window(nums, k):
     """
     vals = set()
     for R, num in enumerate(nums):
+        # if we surpass a valid window length, drop off the value that is no longer in the window
         if R >= k:
             vals.discard(nums[R - k])
 
