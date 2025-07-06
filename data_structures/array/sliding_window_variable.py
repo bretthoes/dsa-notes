@@ -14,6 +14,7 @@ print(longestSubarray([4,2,2,3,3,3]))
 """
 Find the minimum length subarray, where the sum is greater than or equal to the target.
 Assume all values are positive.
+O(n)
 """
 def shortestSubarray(nums, target):
     L, total = 0, 0
