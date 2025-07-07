@@ -19,11 +19,30 @@ class Trie:
         self.root = TrieNode()
 
     def insert(self, word):
-        pass
+        cur = self.root
+        for c in word:
+            if c not in cur.children:
+                cur.children[c] = TrieNode()
+            cur = cur.children[c]
+        cur.word = True
 
     def search(self, word):
-        pass
+        cur = self.root
+        for c in word:
+            if c not in cur.children:
+                return False
+            cur = cur.children[c]
+        return cur.word
 
     def startsWith(self, prefix):
-        pass
+        cur = self.root
+        for c in prefix:
+            if c not in cur.children:
+                return False
+            cur = cur.children[c]
+        return True
+
+
+
+
 
