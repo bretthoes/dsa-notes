@@ -1,5 +1,8 @@
 """
-Min-Heap approach: keep a size-k min-heap of (freq, num).
+Given an array arr[] and a positive integer k, the task is to find the k most frequently occurring elements from a given array.
+
+Min-Heap approach:
+keep a size-k min-heap of (freq, num).
 Time: O(n log k) worst-case, Space: O(m + k) extra (map + heap).
 """
 from typing import List

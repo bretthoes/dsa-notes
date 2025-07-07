@@ -1,10 +1,13 @@
 """
+Given an array arr[] and a positive integer k, the task is to find the k most frequently occurring elements from a given array.
+
+Bucket sort approach:
 Time complexity: O(n)
 Space complexity: O(n)
 """
 from typing import List
 
-def topKcountsuent(nums: List[int], k: int) -> List[int]:
+def topKFrequent(nums: List[int], k: int) -> List[int]:
     counts = {}
     for num in nums:
         counts[num] = counts.get(num, 0) + 1
@@ -21,3 +24,4 @@ def topKcountsuent(nums: List[int], k: int) -> List[int]:
                 return res
 
     return res
+
