@@ -210,6 +210,92 @@ class BinaryTree:
         _dfs(self.root)
         return results
 
+    def inorder_iterative_dfs(self):
+        """
+        Iterative DFS (notice using a loop instead of recursion)
+        Perform an in-order traversal of the tree without recursion, using an explicit stack.
+        Visits nodes in left–root–right order and prints each node’s value as it’s visited.
+        Time Complexity: O(n)
+        Example:
+            Given this tree:
+                2
+               / \
+              1   3
+            The output order will be:
+            1, 2, 3
+        """
+        stack = []
+        curr = self.root
+        while curr or stack:
+            if curr:
+                stack.append(curr)
+                curr = curr.left
+            else:
+                curr = stack.pop()
+                print(curr.value)
+                curr = curr.right
+
+    def preorder(self):
+        stack = [self.root] if self.root else []
+        while stack:
+            node = stack.pop()
+            print(node.value)
+            if node.right:
+                stack.append(node.right)
+            if node.left:
+                stack.append(node.left)
+
+    def postorder(self):
+        """
+        Iterative post-order traversal (left–right–root) using only a stack and visit flags.
+
+        Time Complexity:
+            O(n) — each node is pushed and popped exactly once.
+
+        Space Complexity:
+            O(n) — stack may hold up to all nodes in the worst case.
+
+        Algorithm:
+          1. Push (root, False) onto the stack.
+          2. While the stack isn’t empty:
+             a. Pop (node, visited).
+             b. If node is None, continue.
+             c. If visited is True, print node.value (we’ve already queued its children).
+             d. If visited is False, push in this order:
+                1. (node, True)       — mark to visit after children
+                2. (node.right, False) — right subtree to process next
+                3. (node.left, False)  — left subtree to process first
+
+        Example on this tree:
+
+                A
+               / \
+              B   C
+             / |   \
+            D   E   F
+
+        Visit order: D, E, B, F, C, A
+        """
+        stack = [(self.root, False)]
+        while stack:
+            node, visited = stack.pop()
+            if node is None:
+                continue
+            if visited:
+                print(node.value)
+            else:
+                # Visit node after its subtrees
+                stack.append((node, True))
+                # Push right then left so left is processed first
+                if node.right:
+                    stack.append((node.right, False))
+                if node.left:
+                    stack.append((node.left, False))
+
+
+
+
+
 
 
 
