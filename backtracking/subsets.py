@@ -38,7 +38,6 @@ Remember we also have to iterate through to make each decision,
 so we get time complexity: O(n * 2^n)
 Space complexity: O(n) -> (height of the tree) 
 """
-
 def subsetsWithoutDuplicates(nums):
     def helper(i):
         if i >= len(nums):
@@ -55,36 +54,4 @@ def subsetsWithoutDuplicates(nums):
     return subsets
 
 print(subsetsWithoutDuplicates([1,2,3]))
-
-"""
-given a list of nums that are not necessarily distinct, return all distinct subsets
-[2,1,2,3]
-
-first thing we want to do with this kind of backtracking problem is to sort the array.
-sorting an array is generally o(n log n), which isn't such a big deal for backtracking
-where the solution is commonly o(2^n) or worse.
-why sort?
-this lets us build our subsets easier. why? because all duplicates are now adjacent.
-but still, why?
-imagine the array below, now sorted:
-[1,2,2,3]
-and we take our same approach as before, each index we have the choice to include, or
-to not include. well, when we have multiple values, we have one path that takes one
-occurrence of 2, another that takes both occurrences of 2, and another that takes
-zero occurrences of 2.
-logically, this approach lets us avoid duplicate subsets.
-
-but, how do we do this with our binary approach at each index?
-when we encounter duplicates, we still actually have two choices:
-    1. include none of the duplicate elements
-    2. include one or more of the duplicate elements
-then, in our 2nd choice, we can break that down into another binary choice, i.e.
-include exactly one, or include two or more.
-
-
-"""
-
-
-
-
 
