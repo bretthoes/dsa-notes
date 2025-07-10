@@ -72,3 +72,14 @@ class Median:
         return (-1 * self.small[0] + self.large[0]) / 2
 
 
+if __name__ == "__main__":
+    m = Median()
+    data = [5, 15, 1, 3, 8, 7]
+    print("Inserting and reporting medians:")
+    for num in data:
+        m.insert(num)
+        print(f"After inserting {num}, median is {m.getMedian()}")
+    print(f"minheap: {m.large}")
+    print(f"maxheap: {m.small}")
+
+
