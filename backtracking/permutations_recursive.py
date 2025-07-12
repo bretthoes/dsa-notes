@@ -30,17 +30,26 @@ So starting with 1, the options would be:
       ...
 """
 def permutationsRecursive(nums):
+    # Recursive helper function that starts inserting elements at index `i`
     def helper(i):
+        # Base case: if we've processed all elements, return a list with an empty list (1 permutation of empty list)
         if i == len(nums):
-            return[[]]
-        resPerms = []
-        perms = helper(i + 1)
+            return [[]]
+
+        resPerms = []  # This will hold all permutations at the current level
+        perms = helper(i + 1)  # Recurse to get permutations of the remaining elements
+
+        # For each smaller permutation...
         for p in perms:
+            # ...insert nums[i] at every possible position in that permutation
             for j in range(len(p) + 1):
-                pCopy = p.copy()
-                pCopy.insert(j, nums[i])
-                resPerms.append(pCopy)
+                pCopy = p.copy()  # Make a copy to avoid modifying the original
+                pCopy.insert(j, nums[i])  # Insert current element at position j
+                resPerms.append(pCopy)  # Add the new permutation to the result list
+
         return resPerms
+
+    # Start recursion from the 0th index
     return helper(0)
 
 print(permutationsRecursive([1,2,3]))
