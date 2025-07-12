@@ -21,7 +21,7 @@ Time complexity:
     - Inserting a number into a list of size n takes O(n) time
 """
 def permutations_iterative(nums):
-    perms = [[]]  # Start with one empty permutation
+    perms = [[]]  # Start with one empty permutation (not a valid permutation, but will help us kicing off building the permutations)
 
     # Process each number in the input list
     for n in nums:
