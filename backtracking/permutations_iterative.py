@@ -38,3 +38,4 @@ def permutations_iterative(nums):
         perms = nextPerms  # Move to the next level of permutations
 
     return perms  # Return the final list of all permutations
+print(permutations_iterative([1,2,3]))

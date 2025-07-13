@@ -71,7 +71,6 @@ def combinations_optimal(n, k):
             curComb.append(j)
             helper(j + 1)
             curComb.pop()
-        pass
     helper(1)
     return combs
 print(combinations_optimal(5,2))
