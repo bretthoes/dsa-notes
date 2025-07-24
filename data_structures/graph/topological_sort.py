@@ -48,4 +48,46 @@ Even if there are multiple components (disjointed), this will still be fine - we
 middle of another, but this will still be topologically valid. In the above example, we don't care if [G,H] appears in
 the beginning, middle, or end of the array, just that G comes before H.
 """
+def topologicalSort(edges, n):
+    def dfs(src):
+        if src in visited:
+            return
+        visited.add(src)
+        # recursively visit all neighbors
+        for dst in adj[src]:
+            dfs(dst)
+        # after visting all descendants, add this node to the result
+        result.append(src)
+
+        # build adjacency list
+    adj = {}
+    for i in range(1, n + 1):
+        adj[i] = []
+    for src, dst in edges:
+        adj[src].append(dst)
+    
+    result = []
+    visited = set()
+    for i in range(1, n + 1):
+        dfs(i)
+    
+    return result[::-1]
+
+
+if __name__ == "__main__":
+    # Example graph: 6 nodes, directed edges
+    edges = [
+        (5, 2),
+        (5, 0),
+        (4, 0),
+        (4, 1),
+        (2, 3),
+        (3, 1)
+    ]
+    n = 6  # Nodes 1 to 6
+
+    result = topologicalSort(edges, n)
+    print("Topological Sort Result:", result)
+
+
 
