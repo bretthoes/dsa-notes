@@ -59,7 +59,7 @@ def topologicalSort(edges, n):
         # after visting all descendants, add this node to the result
         result.append(src)
 
-        # build adjacency list
+    # build adjacency list
     adj = {}
     for i in range(1, n + 1):
         adj[i] = []
@@ -77,14 +77,15 @@ def topologicalSort(edges, n):
 if __name__ == "__main__":
     # Example graph: 6 nodes, directed edges
     edges = [
-        (5, 2),
-        (5, 0),
-        (4, 0),
-        (4, 1),
-        (2, 3),
-        (3, 1)
+        (1, 2),
+        (1, 3),
+        (2, 4),
+        (4, 6),
+        (5, 6),
+        (3, 5),
+        (7, 8)
     ]
-    n = 6  # Nodes 1 to 6
+    n = 8  # Nodes 1 to 6
 
     result = topologicalSort(edges, n)
     print("Topological Sort Result:", result)
