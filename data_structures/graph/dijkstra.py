@@ -28,7 +28,7 @@ import heapq
 
 def shortestPath(edges, n, src):
     """
-    Give na connected graph represented by a list of edges, where:
+    Given a connected graph represented by a list of edges, where:
     - edge[0] = src
     - edge[1] = dest
     - edge[2] = weight,
